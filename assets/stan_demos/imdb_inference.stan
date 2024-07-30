@@ -7,5 +7,8 @@ parameters {
 }
 model {
   d ~ dirichlet(alpha);
-  ratings[i] ~ multinomial(d);
+  ratings ~ multinomial(d);
+}
+generated quantities {
+  real average_rating = mean(d);
 }
