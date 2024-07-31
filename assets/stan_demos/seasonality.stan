@@ -1,9 +1,10 @@
 data {
   int<lower=0> N, F;
-  row_vector[N] x;          // "timestamps"
+  array[N] int x;          // "timestamps"
   vector<lower=0>[N] y;
 }
 transformed data {
+  row_vector[N] t = to_row_vector(x);
   vector[F] freq = 2 * pi() * linspaced_vector(F, 1, F) / 365;
 }
 parameters {
@@ -18,5 +19,5 @@ transformed parameters {
      alpha = cos(freq * x + phases) * amplitudes;
 }}
 model {
-  y ~ normal_id_glm(x, alpha, [beta]', sigma);
+  y ~ normal_id_glm(t, alpha, [beta]', sigma);
 }
