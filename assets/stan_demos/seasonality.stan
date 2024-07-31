@@ -4,7 +4,7 @@ data {
   vector<lower=0>[N] y;
 }
 transformed data {
-  vector[F] freq = 365 / linspaced_vector(F, 1, F);
+  vector[F] freq = 2 * pi() * linspaced_vector(F, 1, F) / 365;
 }
 parameters {
   real<lower=0> sigma;
