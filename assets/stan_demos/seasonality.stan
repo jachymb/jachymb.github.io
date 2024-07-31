@@ -14,11 +14,9 @@ parameters {
 }
 transformed parameters {
   vector[N] alpha;         // seasonality
-  {
-  	matrix[N, F] phases = rep_matrix(phase_shifts', N);
-    alpha = cos(freq * x + phases) * amplitudes;
-  }
-}
+  {  matrix[N, F] phases = rep_matrix(phase_shifts', N);
+     alpha = cos(freq * x + phases) * amplitudes;
+}}
 model {
   y ~ normal_id_glm(x, alpha, [beta]', sigma);
 }
