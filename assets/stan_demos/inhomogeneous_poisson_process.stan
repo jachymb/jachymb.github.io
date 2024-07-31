@@ -7,9 +7,6 @@ parameters {
   real alpha, beta; // Assuming rate growth is linear
 }
 model {
-  alpha ~ normal(0, 10);  // Regularization priors
-  beta ~ normal(0, 10);
-
   // Log-likelihood contribution from observed events
   target += alpha + beta * t;
   // For "unobserved" events it is ∫₀ᵀ e^(α + β*t) dt
