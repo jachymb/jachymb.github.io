@@ -1,24 +1,24 @@
 data {
   int<lower=0> N, K, F;
-  matrix[N, K] x;          // features
-  vector[N] days;          // "timestamps"
+  row_vector[N] x;          // "timestamps"
   vector<lower=0>[N] y;
+}
+transformed data {
+  vector[F] freq = 365 / linspaced_vector(F, 1, F);
 }
 parameters {
   real<lower=0> sigma;
-  vector[K] beta;
+  real beta;
   vector<lower=-pi(),upper=pi()>[F] phase_shifts;
   vector<lower=0>[F] amplitudes;
 }
 transformed parameters {
   vector[N] alpha;         // seasonality
   {
-    row_vector[F] freq = 365/linspaced_row_vector(F, 1, F);
-  	matrix[N, F] periods = days * freq;
-	  matrix[N, F] phases = rep_matrix(phase_shifts', N);
-    alpha = cos(periods + phases) * amplitudes;
+  	matrix[N, F] phases = rep_matrix(phase_shifts', N);
+    alpha = cos(freq * x + phases) * amplitudes;
   }
 }
 model {
-  y ~ normal_id_glm(x, alpha, beta, sigma);
+  y ~ normal_id_glm(x, alpha, [beta]', sigma);
 }
