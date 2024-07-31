@@ -1,5 +1,5 @@
 data {
-  int<lower=0> N, K, F;
+  int<lower=0> N, F;
   row_vector[N] x;          // "timestamps"
   vector<lower=0>[N] y;
 }
