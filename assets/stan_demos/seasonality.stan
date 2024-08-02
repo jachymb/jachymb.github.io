@@ -16,8 +16,8 @@ parameters {
 transformed parameters {
   row_vector[N] alpha;         // seasonality
   {
-	matrix[F, N] phases = ;
-    alpha = amplitudes * cos(freq * t + rep_matrix(phase_shifts, N));
+	matrix[F, N] phases = rep_matrix(phase_shifts, N);
+    alpha = amplitudes * cos(freq * t + phases);
   }
 }
 model {
