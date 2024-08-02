@@ -4,15 +4,15 @@ data {
   vector[N] y;
 }
 transformed data {
-  vector[N] free_v = to_vector(free);
+  row_vector[N] free_v = to_row_vector(free);
 }
 parameters {
   real alpha, sigma;
   row_vector[K] beta;
 }
-model {  // code not efficient, should be vectorized
+model {
   for (n in (K+1):N) {
-    vector beta_adj = beta .* free_v[n-K:n];
+    row_vector[K] beta_adj = beta .* free_v[n-K:n];
     real total_w = sum(beta_adj);
     if (total_w > 0) {  // Any free within last K
         real mu = alpha + beta_adj * y[n-K:n] / total_w;
