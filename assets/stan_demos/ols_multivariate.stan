@@ -1,8 +1,8 @@
 data {
-  int<lower=1> K;
-  int<lower=K+1> N;
-  matrix[N, K] x;
-  vector[N] y;
+  int<lower=1> K;    // num features
+  int<lower=K+1> N;  // num samples
+  matrix[N, K] x;    // features
+  vector[N] y;       // response
 }
 parameters {
   vector[K] beta;

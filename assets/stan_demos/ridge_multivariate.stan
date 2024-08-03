@@ -1,8 +1,8 @@
 data {
-  int<lower=1> K;
-  int<lower=0> N;
-  matrix[N, K] x;
-  vector[N] y;
+  int<lower=1> K;    // num features
+  int<lower=0> N;    // num samples
+  matrix[N, K] x;    // features
+  vector[N] y;       // response
   real<lower=0> lambda;
 }
 parameters {
