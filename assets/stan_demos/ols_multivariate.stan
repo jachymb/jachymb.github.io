@@ -1,6 +1,6 @@
 data {
-  int<lower=0> N;
-  int<lower=0> K;
+  int<lower=1> K;
+  int<lower=K+1> N;
   matrix[N, K] x;
   vector[N] y;
 }

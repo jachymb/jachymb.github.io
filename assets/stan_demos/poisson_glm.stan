@@ -1,6 +1,6 @@
 data {
-  int<lower=0> N;
-  int<lower=0> K;
+  int<lower=1> N;
+  int<lower=1> K;
   array[N] int<lower=0> y;
   matrix[N, K] x;  // features
 }

@@ -1,6 +1,6 @@
 data {
-  int<lower=0> K;  // model order
-  int<lower=0> N;  // dataset size
+  int<lower=1> K;    // model order
+  int<lower=K+1> N;  // dataset size
   vector[N] y;
 }
 parameters {

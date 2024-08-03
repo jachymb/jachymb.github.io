@@ -1,6 +1,6 @@
 data {
+  int<lower=1> K;
   int<lower=0> N;
-  int<lower=0> K;
   matrix[N, K] x;
   vector[N] y;
   real<lower=0> lambda;

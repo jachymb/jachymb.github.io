@@ -1,5 +1,6 @@
 data {
-  int<lower=0> N, K;
+  int<lower=1> K;    // model order
+  int<lower=K+1> N;  // dataset size
   array[N] int<lower=0,upper=1> free;
   vector[N] y;
 }

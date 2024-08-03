@@ -1,6 +1,6 @@
 data {
   vector<lower=0>[5] alpha;
-  array[5] int rating;
+  array[5] int<lower=0> rating;
 }
 parameters {
   simplex[5] d;

@@ -1,5 +1,5 @@
 data {
-    int<lower=0> M, N, K;
+    int<lower=1> M, N, K;
     matrix[M, N] x;
     array[M] int<lower=0,upper=1> y;
 }

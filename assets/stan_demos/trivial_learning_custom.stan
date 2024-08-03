@@ -8,7 +8,7 @@ functions {
   }
 }
 data {
-  int N;
+  int<lower=1> N;
   array[N] int<lower=0> x;
 }
 parameters {

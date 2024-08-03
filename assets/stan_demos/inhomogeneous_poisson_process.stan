@@ -1,5 +1,5 @@
 data {
-  int<lower=0> N; // Number of observed events
+  int<lower=1> N; // Number of observed events
   real<lower=0> T; // End of observation interval
   vector<lower=0, upper=T>[N] t; // Times of events
 }
