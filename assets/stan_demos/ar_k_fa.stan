@@ -8,8 +8,9 @@ transformed data {
   row_vector[N] free_v = to_row_vector(free);
 }
 parameters {
-  real alpha, sigma;
+  real alpha;
   row_vector[K] beta;
+  real<lower=0> sigma;
 }
 model {
   for (n in (K+1):N) {

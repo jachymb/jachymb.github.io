@@ -6,7 +6,7 @@ data {
 parameters {
   real alpha;
   row_vector[K] beta;
-  real sigma;
+  real<lower=0> sigma;
 }
 model {
   for (n in (K+1):N) {
