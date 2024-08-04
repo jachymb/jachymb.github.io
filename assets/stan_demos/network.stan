@@ -9,7 +9,7 @@ parameters {
 }
 model {
   for (i in 1:N) {
-    r[i] ~ bernoulli(pr);
+    r[i] ~ bernoulli(pr);  // can factor out
     s[i] ~ bernoulli(ps[r[i]]);
     w[i] ~ bernoulli(pw[r[i], s[i]]);
   }
