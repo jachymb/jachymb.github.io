@@ -1,5 +1,5 @@
 data {
-  int N;  // num experiments
+  int<lower=1> N;  // num experiments
   array[N] int<lower=0> successes;
   array[N] int<lower=0> failures;
 }
