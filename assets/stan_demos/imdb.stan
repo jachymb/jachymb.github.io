@@ -7,8 +7,8 @@ parameters {
   array[N] simplex[5] d;
 }
 model {
-  d ~ dirichlet(alpha);  // for all d[i]
   for (i in 1:N) {
+    d[i] ~ dirichlet(alpha);                              // can factor out as d ~ dirichlet(alpha);
     ratings[i] ~ multinomial(d[i]);
   }
 }
