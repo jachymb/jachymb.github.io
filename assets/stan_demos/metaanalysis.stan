@@ -1,16 +1,16 @@
 data {
   int<lower=1> N;  // num experiments
   array[N] int<lower=0> successes;
-  array[N] int<lower=0> failures;
+  array[N] int<lower=0> trials;
 }
 parameters {
-  vector<lower=0,upper=1>[N] theta;
+  array[N] real<lower=0,upper=1> theta;
   real<lower=0> a, b;
 }
 model {
   for (i in 1:N) {
-    int n = successes[i] + failures[i];
     theta ~ beta(a, b);
-    successes[i] ~ binomial(n, theta);
+    successes[i] ~ binomial(trials[i], theta);
+    // Assuming trials[i] >= successes[i]
   }
 }
