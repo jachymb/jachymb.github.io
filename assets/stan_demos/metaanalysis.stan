@@ -6,12 +6,9 @@ data {
 }
 parameters {
   array[K] real<lower=0,upper=1> theta;
-  real<lower=0> a, b;
+  real<lower=0> a, b; // prior parameters
 }
-model {
-  for (i in 1:K) {
-    theta ~ beta(a, b);
-    x[i] ~ binomial(n[i], theta);
-
-  }
+model { // Using vectorized functions
+  theta ~ beta(a, b);
+  x ~ binomial(n, theta);
 }
