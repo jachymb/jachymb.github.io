@@ -10,3 +10,6 @@ model {
   theta ~ beta(1,1);
   y ~ bernoulli(theta);
 }
+generated quantities {
+  int<lower=0,upper=1> y_pred = bernoulli_rng(theta);
+}
