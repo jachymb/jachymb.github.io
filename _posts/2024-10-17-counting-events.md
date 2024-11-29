@@ -174,10 +174,10 @@ for example when we want to count events per day and an event may be recorded at
 
 We can now summarize these analogies into the following table:
 
-| Time model                      | Waiting time for next event<br>$Y_i$ | Waiting time for $k$-th event<br>$S_k$ | Count of events<br>$N(T)$                      |
-|---------------------------------|--------------------------------------|----------------------------------------|------------------------------------------------|
-| Continuous $T \in \mathbb{R}^+$ | $\mathrm{Exponential}(\lambda)$      | $\mathrm{Erlang}(k, \lambda)$          | $\mathrm{Poisson}(T \lambda)$                  |
-| Discrete $T \in \mathbb{N}$     | $\mathrm{Geometric}(\lambda)$        | $\mathrm{NegBin}(k, \lambda)$          | $\mathrm{Bin}(T, \lambda)$                     | 
+| Time model                      | Waiting time for next event<br>$Y_i$ | Waiting time for $k$-th event<br>$S_k$ | Count of events<br>$N(T)$      |
+|---------------------------------|--------------------------------------|----------------------------------------|--------------------------------|
+| Continuous $T \in \mathbb{R}^+$ | $\mathrm{Exponential}(\lambda)$      | $\mathrm{Erlang}(k, \lambda)$          | $\mathrm{Poisson}(T \lambda)$  |
+| Discrete $T \in \mathbb{N}$     | $\mathrm{Geometric}(\theta)$         | $\mathrm{NegBinomial}(k, \theta)$      | $\mathrm{Binomial}(T, \theta)$ | 
 
 
 ### Takeaway
