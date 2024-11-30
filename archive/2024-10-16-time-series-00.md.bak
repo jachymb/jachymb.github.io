@@ -1,12 +1,3 @@
----
-title: 'Building a probabilistic time series model: Chapter 0 – Intro'
-layout: post
-date: 2024-10-16
-categories: []
-tags: []
-pin: true
-math: true
----
 <style type="text/css">
 ol ol {list-style-type: lower-alpha;}
 </style>
