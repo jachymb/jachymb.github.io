@@ -2,8 +2,7 @@
 title: 'Counting events'
 layout: post
 date: 2024-10-17
-categories: [probability theory]
-tags: []
+tags: [probability theory]
 pin: true
 math: true
 ---
@@ -126,12 +125,12 @@ There is a theorem<sup>[1]</sup> in renewal theory,
 which says that the [probability generating function](https://en.wikipedia.org/wiki/Probability-generating_function) (PGF)
 of the counts $G_{N(T)}$ is given by:
 
-$$G_{N(T)}(z) = \mathcal{L}^{-1}\left(\frac{1-\phi(r)}{r(1-z\phi(r))}\right)(T),$$
+$$G_{N(T)}(z) = \mathcal{L}^{-1}\left(\frac{1-\varphi(r)}{r(1-z\varphi(r))}\right)(T),$$
 
 where $\mathcal{L}^{-1}$ denotes the inverse Laplace transform 
-and $\phi(r) = \mathrm{E}[e^{-rY_i}] = \int_{-\infty}^{\infty} e^{-rt} p_{Y_i}(t)\mathrm{d}t$ is the Laplace transform of the waiting time probability density. 
+and $\varphi(r) = \mathrm{E}[e^{-rY_i}] = \int_{-\infty}^{\infty} e^{-rt} p_{Y_i}(t)\mathrm{d}t$ is the Laplace transform of the waiting time probability density. 
 
-Now this seems promising, obtaining $\phi$ is usually easy and getting the series expansion of the PGF is also not a huge problem.
+Now this seems promising, obtaining $\varphi$ is usually easy and getting the series expansion of the PGF is also not a huge problem.
 (Mathematica can often do both.)
 The challenge here is computing the inverse Laplace transform. 
 This requires techniques of complex analysis even for the simplest cases and to my knowledge an analytic solution doesn't exist in most cases.

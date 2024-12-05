@@ -2,8 +2,7 @@
 title: 'Waiting times'
 layout: post
 date: 2024-10-16
-categories: [probability theory]
-tags: []
+tags: [probability theory]
 pin: true
 math: true
 ---
@@ -66,7 +65,7 @@ except for discrete $t$, it now describes the [geometric distribution](https://e
 although a different parametrization is usually used.
 
 # Weibull distribution
-The Weibull distribution is a simple non-memoryless distribution used to model waiting times.
+The [Weibull distribution](https://en.wikipedia.org/wiki/Weibull_distribution) is a simple non-memoryless distribution used to model waiting times.
 Again, to show similary with the exponential distribution, the density of the Weibull distribution can be written as:
 
 $$ p(t|\lambda,\alpha) \propto e^{- (\lambda t)^{\alpha} + (\alpha-1)\ln(\lambda t)} $$

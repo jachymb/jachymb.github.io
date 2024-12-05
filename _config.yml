@@ -148,7 +148,7 @@ pwa:
 paginate: 10
 
 # The base URL of your site
-baseurl: https://jachymb.github.io/
+baseurl: ''
 
 # ------------ The following options are not recommended to be modified ------------------
 
@@ -218,10 +218,10 @@ exclude:
   - package*.json
 
 jekyll-archives:
-  enabled: [categories]
+  enabled: [tags]
   layouts:
-    category: category
-    #tag: tag
+    #category: category
+    tag: tag
   permalinks:
-    #tag: /tags/:name/
-    category: /categories/:name/
+    tag: /tags/:name/
+    #category: /categories/:name/
