@@ -29,7 +29,7 @@ Accounting for this requires a more sophisticated models.
 However, keep in mind that even in the presence of such changes, they will usually be continuous
 and thus the I.I.D. assumption could be reasonable at least locally (i.e. short-term).
 
-# Memorylessness
+# Memorylessness – Exponential & Geometric
 A relatively simple, yet powerful assumption we may want to make about the process is memorylessness.
 
 We call a probability distribution to be [memoryless](https://en.wikipedia.org/wiki/Memorylessness) when 
@@ -64,6 +64,11 @@ For discrete time, $t \in \mathbb{N}$, we can similarly obtain the same proporti
 except for discrete $t$, it now describes the [geometric distribution](https://en.wikipedia.org/wiki/Geometric_distribution),
 although a different parametrization is usually used.
 
+![](/assets/images/exponential_events.png "Sample waiting times from Exponential(1/3) distribution")
+![](/assets/images/geometric_events.png "Sample waiting times Geometric(1/3) distribution")
+
+(All the plots here are using a distribution parametrization with expected waiting time 3 units.)
+
 # Weibull distribution
 The [Weibull distribution](https://en.wikipedia.org/wiki/Weibull_distribution) is a simple non-memoryless distribution used to model waiting times.
 Again, to show similary with the exponential distribution, the density of the Weibull distribution can be written as:
@@ -74,18 +79,30 @@ where both $\lambda,\alpha \in \mathbb{R}^+$.
 From here it's immediately obvious that it reduces to exponential distribution for <nobr>$\alpha=1$.</nobr>
 With $\alpha>1$ the probability we will wait a long time decreases with the time we have already spent waiting.
 
-This may be useful to model some of the cases where the memorylessness is not appropriate.
+This may be useful to model some of the cases where the memorylessness is not appropriate,
+for example the time when a device fails considering it's wearing off and getting less reliable as time passes.
+
+With $\alpha<1$ it produces clusters of events occurring within a short window separated by long waiting between clusters. 
 It's usually meant as a continuous-time distribution, but there is a [discrete variant](https://en.wikipedia.org/wiki/Discrete_Weibull_distribution) too.
+
+![](/assets/images/weibull_events1.png "Sample waiting times from Weibull(1/3, 1/2) distribution")
+![](/assets/images/weibull_events2.png "Sample waiting times from Weibull(3, 3/Γ(4/3)) distribution")
+
 
 # Uniform and Beta distribution
 The [continuous uniform distribution](https://en.wikipedia.org/wiki/Continuous_uniform_distribution) $U(0, \alpha)$ may be used to describe a waiting time when we know there is a certain hard limit for the event to happen no later than $t=\alpha$.
 I think the uniform distribution is often quite unrealistic and perhaps the more general [Beta distribution](https://en.wikipedia.org/wiki/Beta_distribution) would be more accurate for such hard limit cases,
 but given the simplicity of the uniform distribution, it may be worth it for the mathematical convenience.
-It may be attempted to justify it by referring to the principle of maximum entropy when we actually have little knowledge about the system.
+One may attempt to justify it by referring to the principle of maximum entropy when we actually have little knowledge about the system.
+
+![](/assets/images/uniform_events.png "Sample waiting times from continuous Uniform(0,6) distribution")
 
 # Lomax distribution
 The [Lomax distribution](https://en.wikipedia.org/wiki/Lomax_distribution) is heavy-tailed and may thus be of interest when we expect outliers in the data. 
 (Informally that means sometimes the waiting time is extremely long.)
+
+![](/assets/images/lomax_events.png "Sample waiting times from Lomax(3,2) distribution")
+
 
 # Waiting for $n$-th event
 One thing we may ask is, given a distribution for the waiting time for one event, what's the probability distribution of waiting for $n$ events?
@@ -120,3 +137,5 @@ The notable solutions when this is possible to do analytically are summarized in
 | Uniform                    | [Irwin-Hall](https://en.wikipedia.org/wiki/Irwin%E2%80%93Hall_distribution)                                             |
 | Gamma                      | [Gamma](https://en.wikipedia.org/wiki/Gamma_distribution)                                                               |
 
+![](/assets/images/erlang_events.png "Sample waiting times from Erlang(6,2) distribution")
+![](/assets/images/nb_events.png "Sample waiting times from NegativeBinomial(4,2/3) distribution")
