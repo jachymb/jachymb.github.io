@@ -36,13 +36,13 @@ social:
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Jáchym Barvínek
   email: jachymb@gmail.com # change to your email address
-  #links:
+  links:
     # The first element serves as the copyright owner's link
     #- https://twitter.com/username # change to your twitter homepage
-    #- https://github.com/username # change to your github homepage
+    - https://github.com/jachymb # change to your github homepage
     # Uncomment below to add more social links
-    # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    - https://www.facebook.com/jachymb
+    - https://www.linkedin.com/in/j%C3%A1chym-barv%C3%ADnek-8420456a/
 
 # Site Verification Settings
 webmaster_verifications:
@@ -224,3 +224,5 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     #category: /categories/:name/
+
+future: true
