@@ -77,6 +77,8 @@ This logic can be applied inductively to obtain that $p_{S_k}(t) = p^{\ast k}(t)
 $$F_k(T) = \int_0^T p_{S_k}(t) \mathrm{d}t = \int_0^T p^{\ast k}(t) \mathrm{d}t$$
 
 ## Special case for exponential distribution
+![](/assets/images/exp_events_count.png "Counts of events with Exponential(1/3) waiting times for T=10")
+
 The above approach is rather general and can be in principle used for any i.i.d. waiting times.
 In the previous chapter, we have seen that the exponential distribution arises from 
 a memorylessness assumption which may quite reasonable in practical modelling. 
@@ -135,7 +137,7 @@ Now this seems promising, obtaining $\varphi$ is usually easy and getting the se
 The challenge here is computing the inverse Laplace transform. 
 This requires techniques of complex analysis even for the simplest cases and to my knowledge an analytic solution doesn't exist in most cases.
 
-Only solution other than reproducing the exponential-Poisson relation above that I was able to find for continuous time
+Only solution other than reproducing the exponential-Poisson relation (cool exercise btw) above that I was able to find for continuous time
 was for the Erlang distribution, which is a sum of i.i.d. exponential waiting times, so it's a generalization.
 In this case, when the waiting time is $\mathrm{Erlang(\alpha, \beta)}, \alpha \in \mathbb{N}, \beta \in \mathbb{R}^+$, then we get:
 
@@ -154,16 +156,17 @@ So although this theorem is deep, it doesn't seem immediately practical for this
 
 ## Discrete time
 We have seen in the previous chapter that for discrete time, 
-the memoryless assumption implies the individual events have i.i.d. distribution $\mathrm{Bernoulli}(\lambda)$.
+the memoryless assumption implies that at each time unit we sample i.i.d.  $\mathrm{Bernoulli}(\theta)$ distribution
+to see whether the event occurred or not.
 It follows easily, that the number of events that happen within an interval of length $T$ 
-has the $\mathrm{Binomial}(T, \lambda)$.
+has the $\mathrm{Binomial}(T, \theta)$ distribution.
 
 When I was first taught about Poisson distribution, I was told it can be seen as a limit case of the Binomial distribution
 in the sense that when keep $T \cdot \theta = \lambda$ fixed then for any $k \in \mathbb{N}$:
 
 $$\lim_{(T,\theta)\to(\infty,0)} p_{\mathrm{Binomial}(T,\theta)}(k) = p_{\mathrm{Poisson}(\lambda)}(k) $$
 
-In the context of using these two distribution to describe counts of events, this intuitively makes sense:
+In the context of using these two distributions to describe counts of events, this intuitively makes sense:
 With discrete time model, with the granularity getting finer (time becoming more continuous),
 $T$ grows for the same amount of physical time (more time units per interval of fixed duration)
 and $\theta$ decreases (lesser probability of event occurring within a shorter window).
