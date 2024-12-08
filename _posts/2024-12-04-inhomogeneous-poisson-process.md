@@ -1,8 +1,8 @@
 ---
-title: 'Inhomogeneous Poisson process modelling - case study'
+title: 'Inhomogeneous Poisson process & case study'
 layout: post
 date: 2024-12-04
-tags: [probability theory]
+tags: [probability theory,statistics,case study]
 pin: true
 math: true
 ---
@@ -43,22 +43,23 @@ Remember that the rate is also the expectation value, which is useful for predic
 ## Parameter estimation
 
 From the statistical perspective, how do we fit this $\lambda(t)$ from data parametrically?
-We first need to assume the function $\lambda(t|\theta)$ is given by a certain formula,
-where we want to find the parameters $\theta$.
+We first need to assume the function $\lambda(t|\mathbf{\theta})$ is given by a certain formula,
+where we want to find the parameters $\mathbf{\theta}$.
 Choice of this formula can be seen as specifications of further assumptions about the system 
 and that should usually follow some exploratory analysis of the data.
 
 As usual with parameter learning, we use maximum likelihood estimation. But what is the likelihood function here?
-We should note that one sample is not a single event occurrence $t_i$ (since these are _not_ identically distributed),
+We should note that one sample is not a single event occurrence $t_i$ (since their differences are _not_ identically distributed),
 but rather, the interval $(0, T)$ with the entire realization $\mathbf{t} = (t_1, ..., t_n)$ where each $t_i \in I$.
 Fortunately, even one realization may be enough to reasonably learn, 
 if there are enough event records compared to the number of parameters.
 The log-likelihood can be shown<sup>[1],[2]</sup> to be:
 
-$$\mathcal{l}(\mathbf{t}|\theta) = \sum_{i=1}^n \log \lambda(t_i|\theta) - \int_0^T \lambda(s|\theta) \mathrm{d}s$$
+$$\mathcal{l}(\mathbf{t}|\mathbf{\theta}) = \sum_{i=1}^n \log \lambda(t_i|\mathbf{\theta}) - \int_0^T \lambda(s|\mathbf{\theta}) \mathrm{d}s$$
 
-Intuitively, the sum accounts for the events that occurred and the integral accounts for the events that did not occur, but could have. 
-For more complicated functions, the integral will likely not have an analytic solution and we the need to resort to numerical methods to evaluate the likelihood.
+Intuitively, the sum accounts for the events that have occurred and the integral accounts for the events that did not occur, but could have. 
+For more complicated functions, the integral will likely not have an analytic solution 
+and we the need to resort to numerical methods to evaluate the likelihood or use sampling algorithms to find the parameters.
 
 ## Modelling – case study
 Briefly looking at the previous plot, I have mentioned that there is some sort of periodicity visible. 
@@ -73,20 +74,23 @@ $$\lambda(t|\alpha,\varphi,\sigma) = \alpha \cdot \exp^{\sigma}(\cos(t-\varphi)-
 Where $\sigma \in \mathbb{R}^+$ controls the "width" of the bump, $\alpha \in \mathbb{R}^+$ is the amplitude
 and $\varphi \in (-\pi,\pi)$ is the phase shift.
 Of course, we assume the data have been scaled so that the length of one day is $2\pi$.
-The exponential is here to guarantee rate positivity and is somewhat convenient to work with.
+The exponential is here to guarantee rate positivity and is somewhat convenient to work with, the $-1$ in the $\cos$ isn't even necessary, but makes $\alpha$ directly interpretable as peak height.
+This function is inspired by the [von Mises distribution](https://en.wikipedia.org/wiki/Von_Mises_distribution) density for circular data.
 I am not arguing this is the best choice here, just that it's _a choice_ that 
 we can reasonably expect to give better predictive results for this particular data than just using the homogeneous process model.
 
-The definite integral here can be expressed in terms of the modified Bessel function of the first kind ([proof](https://www.smbc-comics.com/comic/2013-01-20)):
+The definite integral here, assuming additionally that $T = 2\pi k, k \in \mathbb{N}$ (i.e. we are analyzing a whole number $k$ of days),
+does not depend on $\varphi$ and
+can be expressed in terms of the modified Bessel function of the first kind ([proof](https://www.smbc-comics.com/comic/2013-01-20)):
 
-$$\int_0^T \lambda(s|\alpha,\varphi,\sigma) \mathrm{d}s = T \cdot \alpha \cdot e^{-\sigma} I_0(\sigma)$$
+$$\int_0^T \lambda(s|\alpha,\varphi,\sigma) \mathrm{d}s = T \cdot \alpha \cdot e^{-\sigma} \cdot I_0(\sigma)$$
 
 although this is not elementary, it's established enough to be implemented in various libraries where you can also do optimization.
 And just to be clear, the sum in the log-likelihood in this case simplifies (trivially) to:
 
 $$\sum_{i=1}^n \log \lambda(t_i|\alpha,\varphi,\sigma) = n(\log(\alpha)-\sigma) + \sigma \sum_{i=1}^n \cos(t_i-\varphi)$$
 
-Now we can find the parameter values using our favorite optimizer (see Appendix). 
+Now we can find the parameter values using our favorite numerical optimizer (see Appendix). 
 The results are shown on the following plots. 
 Visually, it seems not great not terrible? 
 But I think this is decent considering I'm only using three parameters.
@@ -112,10 +116,15 @@ where we can use them to express arbitrary periodicities, which provides a natur
 ## Appendix – Code
 Optimization in Wolfram Script is short code:
 ```wolfram
-n = Length[data];
-loglike = sigma*Total[Cos[data - phi]] + (Log[alpha]-sigma)*n - alpha*T*Exp[-sigma]*BesselI[0, sigma];
+T = 2*k*Pi;
+loglike = (
+  sigma*Total[Cos[data - phi]]
+  + (Log[alpha]-sigma)*Length[data] 
+  - alpha*T*Exp[-sigma]*BesselI[0, sigma]
+);
 constraints = sigma > 0 && alpha > 0 && -Pi < phi <= Pi;
 NMaximize[{loglike, constraints}, {alpha, sigma, phi}]
+
 ```
 
 But I like STAN probabilistic modelling, even though the code is more verbose, it can be more naturally integrated with Bayesian techniques.
@@ -123,15 +132,20 @@ But I like STAN probabilistic modelling, even though the code is more verbose, i
 ```stan
 functions {
   real my_process_lpdf(data vector t, data real T, real alpha, real phi, real sigma) {
-    return sigma*sum(cos(t-phi)) + (log(alpha)-sigma)*size(t)
+    return sigma*sum(cos(t-phi)) 
+         + (log(alpha)-sigma)*size(t)
          - alpha*T*exp(-sigma)*modified_bessel_first_kind(0, sigma);
   }
 }
 
 data {
   int<lower=0> N;
-  real<lower=0> T;
+  int<lower=0> k;
   vector<lower=0,upper=T>[N] t;
+}
+
+transformed data {
+  real T = 2*k*pi();
 }
 
 parameters {
@@ -144,3 +158,5 @@ model {
     t ~ my_process(T, alpha, phi, sigma); 
 }
 ```
+
+[Notebook for plots.](/assets/notebooks/imhomogeneous_process.ipynb)
