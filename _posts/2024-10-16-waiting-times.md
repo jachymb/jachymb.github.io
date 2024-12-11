@@ -2,7 +2,7 @@
 title: 'Waiting times'
 layout: post
 date: 2024-10-16
-tags: [probability theory,time series]
+tags: [probabilistic modelling,time series,event series]
 pin: true
 math: true
 ---

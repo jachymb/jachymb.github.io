@@ -2,7 +2,7 @@
 title: 'Counting events'
 layout: post
 date: 2024-10-17
-tags: [probability theory,time series]
+tags: [probabilistic modelling,time series,event series]
 pin: true
 math: true
 ---

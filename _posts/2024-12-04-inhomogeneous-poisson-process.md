@@ -2,7 +2,7 @@
 title: 'Inhomogeneous Poisson process & case study'
 layout: post
 date: 2024-12-04
-tags: [probability theory,statistics,time series,case study]
+tags: [probabilistic modelling,statistics,time series,case study,event series]
 pin: true
 math: true
 ---
@@ -43,7 +43,7 @@ Remember that the rate is also the expectation value, which is useful for predic
 ## Parameter estimation
 
 From the statistical perspective, how do we fit this $\lambda(t)$ from data parametrically?
-We first need to assume the function $\lambda(t|\mathbf{\theta})$ is given by a certain formula,
+We first need to assume the function $\lambda(t\,|\,\mathbf{\theta})$ is given by a certain formula,
 where we want to find the parameters $\mathbf{\theta}$.
 Choice of this formula can be seen as specifications of further assumptions about the system 
 and that should usually follow some exploratory analysis of the data.
@@ -55,7 +55,7 @@ Fortunately, even one realization may be enough to reasonably learn,
 if there are enough event records compared to the number of parameters.
 The log-likelihood can be shown<sup>[1],[2]</sup> to be:
 
-$$\mathscr{l}(\mathbf{t}|\mathbf{\theta}) = \sum_{i=1}^n \log \lambda(t_i|\mathbf{\theta}) - \int_0^T \lambda(s|\mathbf{\theta}) \mathrm{d}s$$
+$$\mathscr{l}(\mathbf{t}\,|\,\mathbf{\theta}) = \sum_{i=1}^n \log \lambda(t_i\,|\,\mathbf{\theta}) - \int_0^T \lambda(s\,|\,\mathbf{\theta}) \mathrm{d}s$$
 
 Intuitively, the sum accounts for the events that have occurred and the integral accounts for the events that did not occur, but could have. 
 For more complicated functions, the integral will likely not have an analytic solution 
@@ -69,7 +69,7 @@ It may be even clearer when we look at the aggregated hourly counts.
 
 A simple three-parameter elementary function for this case may look like:
 
-$$\lambda(t|\alpha,\varphi,\sigma) = \alpha \cdot \exp^{\sigma}(\cos(t-\varphi)-1)$$
+$$\lambda(t\,|\,\alpha,\varphi,\sigma) = \alpha \cdot \exp^{\sigma}(\cos(t-\varphi)-1)$$
 
 Where $\sigma \in \mathbb{R}^+$ controls the "width" of the bump, $\alpha \in \mathbb{R}^+$ is the amplitude
 and $\varphi \in (-\pi,\pi)$ is the phase shift.
@@ -83,12 +83,12 @@ The definite integral here, assuming additionally that $T = 2\pi k, k \in \mathb
 does not depend on $\varphi$ and
 can be expressed in terms of the modified Bessel function of the first kind ([proof](https://www.smbc-comics.com/comic/2013-01-20)):
 
-$$\int_0^T \lambda(s|\alpha,\varphi,\sigma) \mathrm{d}s = T \cdot \alpha \cdot e^{-\sigma} \cdot I_0(\sigma)$$
+$$\int_0^T \lambda(s\,|\,\alpha,\varphi,\sigma) \mathrm{d}s = T \cdot \alpha \cdot e^{-\sigma} \cdot I_0(\sigma)$$
 
 although this is not elementary, it's established enough to be implemented in various libraries where you can also do optimization.
 And just to be clear, the sum in the log-likelihood in this case simplifies (trivially) to:
 
-$$\sum_{i=1}^n \log \lambda(t_i|\alpha,\varphi,\sigma) = n(\log(\alpha)-\sigma) + \sigma \sum_{i=1}^n \cos(t_i-\varphi)$$
+$$\sum_{i=1}^n \log \lambda(t_i\,|\,\alpha,\varphi,\sigma) = n(\log(\alpha)-\sigma) + \sigma \sum_{i=1}^n \cos(t_i-\varphi)$$
 
 Now we can find the parameter values using our favorite numerical optimizer (see Appendix). 
 The results are shown on the following plots. 
