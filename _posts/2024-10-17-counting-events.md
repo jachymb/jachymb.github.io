@@ -2,7 +2,7 @@
 title: 'Counting events'
 layout: post
 date: 2024-10-17
-tags: [probability theory]
+tags: [probability theory,time series]
 pin: true
 math: true
 ---
@@ -88,7 +88,7 @@ and here I show where the name comes from.
 
 As a reminder, the density of the exponential distribution has a single parameter $\lambda$ and is given by:
 
-$$p(t) = \lambda e^{-\lambda t}$$ for $t > 0$, otherwise $0$.
+$$p(t) = \lambda e^{-\lambda t}, \; t > 0$$ 
 
 Convolving this density with itself produces:
 
@@ -191,6 +191,7 @@ We derived the Poisson distribution as the count of events of a random process f
 Obtaining the distribution of counts of events for other waiting time distributions is possible in principle, at least numerically,
 but usually won't have a nice closed-form solution.
 
+Next read: [Inhomogeneous Poisson process](/posts/inhomogeneous-poisson-process/)
 
 ## References
 1. Renewal Theory, D.R.Cox, 1962, p. 37

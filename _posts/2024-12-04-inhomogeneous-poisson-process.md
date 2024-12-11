@@ -2,7 +2,7 @@
 title: 'Inhomogeneous Poisson process & case study'
 layout: post
 date: 2024-12-04
-tags: [probability theory,statistics,case study]
+tags: [probability theory,statistics,time series,case study]
 pin: true
 math: true
 ---
@@ -55,7 +55,7 @@ Fortunately, even one realization may be enough to reasonably learn,
 if there are enough event records compared to the number of parameters.
 The log-likelihood can be shown<sup>[1],[2]</sup> to be:
 
-$$\mathcal{l}(\mathbf{t}|\mathbf{\theta}) = \sum_{i=1}^n \log \lambda(t_i|\mathbf{\theta}) - \int_0^T \lambda(s|\mathbf{\theta}) \mathrm{d}s$$
+$$\mathscr{l}(\mathbf{t}|\mathbf{\theta}) = \sum_{i=1}^n \log \lambda(t_i|\mathbf{\theta}) - \int_0^T \lambda(s|\mathbf{\theta}) \mathrm{d}s$$
 
 Intuitively, the sum accounts for the events that have occurred and the integral accounts for the events that did not occur, but could have. 
 For more complicated functions, the integral will likely not have an analytic solution 
@@ -107,6 +107,7 @@ where we can use them to express arbitrary periodicities, which provides a natur
 ![](/assets/images/step_plot_sales_fit.png "Cumulative purchase counts with fit")
 
 
+Next read: [Generalized linear models](/posts/glms/)
 
 
 ## References 

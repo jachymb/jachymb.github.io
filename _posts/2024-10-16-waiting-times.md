@@ -2,7 +2,7 @@
 title: 'Waiting times'
 layout: post
 date: 2024-10-16
-tags: [probability theory]
+tags: [probability theory,time series]
 pin: true
 math: true
 ---
@@ -139,3 +139,5 @@ The notable solutions when this is possible to do analytically are summarized in
 
 ![](/assets/images/erlang_events.png "Sample waiting times from Erlang(6,2) distribution")
 ![](/assets/images/nb_events.png "Sample waiting times from NegativeBinomial(4,2/3) distribution")
+
+Next read: [Counting events](/posts/counting-events/)
