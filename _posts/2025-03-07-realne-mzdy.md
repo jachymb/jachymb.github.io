@@ -54,15 +54,9 @@ lang: cs
       const doc = await fetchAndParseHTML(proxyUrl + 'https://csu.gov.cz/mira_inflace');
 
       if (doc) {
-        console.log("HTML data fetched successfully");
-
         const table = doc.getElementsByTagName('table')[0];
-        console.log(table);
-
         document.getElementById('tablecopy').appendChild(table.cloneNode(table.cloneNode(true)));
-
         const cells = table.getElementsByTagName('td');
-        console.log(cells);
 
         inflationData.data = Array.from(cells).map(cell => parseFloat(cell.textContent.replace(',', '.')));
 
@@ -76,7 +70,6 @@ lang: cs
         document.getElementById('last_month').textContent = inflationData.currentMonth;
 
         inflationData.isLoaded = true;
-        console.log("Inflation data processed and stored");
       }
     } catch (error) {
       console.error("Error processing inflation data:", error);
@@ -107,7 +100,6 @@ lang: cs
   }
   function calculateInflation() {
     if (!inflationData.isLoaded) {
-      console.log("Data not yet loaded. Loading now...");
       fetchInflationDataOnce().then(() => calculateInflation(period));
       return;
     }
@@ -136,7 +128,6 @@ lang: cs
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    console.log("Page loaded, fetching inflation data...");
     fetchInflationDataOnce();
   });
 
