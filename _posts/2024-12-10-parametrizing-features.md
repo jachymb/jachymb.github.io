@@ -6,6 +6,7 @@ tags: [machine learning,statistics,case study]
 pin: true
 math: true
 published: false
+lang: en
 ---
 
 In this article, I will show how we can make a model similar to the one provided by the [Prophet](https://facebook.github.io/prophet/docs/quick_start.html)

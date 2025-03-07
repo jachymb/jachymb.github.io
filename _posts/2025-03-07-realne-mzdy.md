@@ -11,10 +11,10 @@ lang: cs
 
 
   <p>Zadej svou nástupní nebo dřívější mzdu a měsíc nástupu nebo jindy v minulosti (nejpozději ale leden 2000) a zjisti, jakou by měla hodnotu v pěnězích v <span id="last_month"></span>. Dokázal zaměstnavatel ocenit tvůj profesní rozvoj a věrnost a dostáváš díky přídavkům na mzdě skutečně vyšší hodnotu, než dřív?</p>
-  <label for="month">Měsíc nástupu:</label> 
-  <input type="month" id="month" min="2000-01">
+  <label for="month">Měsíc nástupu: </label> 
+  <input type="month" id="month" min="2000-01" placeholder="YYYY-MM">
 
-  <label for="salary">Nástupní nebo dřívější plat (Kč):</label>
+  <label for="salary">Nástupní nebo dřívější plat (Kč): </label>
 
   <input type="currency" id="salary" placeholder="Nástupní plat" step="1">
   <button onclick="calculateInflation()">Uprav o inflaci</button>

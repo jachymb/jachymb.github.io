@@ -5,6 +5,7 @@ date: 2024-12-04
 tags: [probabilistic modelling,statistics,time series,case study,event series]
 pin: true
 math: true
+lang: en
 ---
 
 In this article I introduce the notion of inhomogeneous Poisson process and show a case study how it can be applied.

@@ -5,6 +5,7 @@ date: 2024-10-17
 tags: [probabilistic modelling,time series,event series]
 pin: true
 math: true
+lang: en
 ---
 
 In this article, I focus on the question, how many events occur within a time frame,
