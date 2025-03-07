@@ -9,7 +9,7 @@ published: true
 ---
 
 
-  <p>Zadej svou nástupní nebo dřívější mzdu a měsíc nástupu nebo jindy v minulosti (nejpozději ale leden 2000) a zjisti, jakou by měla hodnotu v pěnězích k <span id="last_month"></span>. Dostáváš díky přídavkům na mzdě skutečně víc?</p>
+  <p>Zadej svou nástupní nebo dřívější mzdu a měsíc nástupu nebo jindy v minulosti (nejpozději ale leden 2000) a zjisti, jakou by měla hodnotu v pěnězích v <span id="last_month"></span>. Dokázal zaměstnavatel ocenit tvůj profesní rozvoj a věrnost a dostáváš díky přídavkům na mzdě skutečně vyšší hodnotu, než dřív?</p>
   <label for="month">Měsíc nástupu:</label> 
   <input type="month" id="month" min="2000-01">
 
@@ -55,10 +55,6 @@ published: true
         console.log(table);
 
         document.getElementById('tablecopy').appendChild(table.cloneNode(table.cloneNode(true)));
-        const startDate = new Date(2000, 0);
-        const currentDate = new Date(startDate.setMonth(startDate.getMonth() + inflationData.data.length));
-        inflationData.currentMonth = months[currentDate.getMonth()] + " " + currentDate.getFullYear();
-        document.getElementById('last_month').textContent = inflationData.currentMonth;
 
         const cells = table.getElementsByTagName('td');
         console.log(cells);
@@ -68,6 +64,11 @@ published: true
         while (inflationData.data.length > 0 && isNaN(inflationData.data[inflationData.data.length - 1])) {
           inflationData.data.pop();
         }
+
+        const startDate = new Date(2000, 0);
+        const currentDate = new Date(startDate.setMonth(startDate.getMonth() + inflationData.data.length));
+        inflationData.currentMonth = months[currentDate.getMonth()] + " " + currentDate.getFullYear();
+        document.getElementById('last_month').textContent = inflationData.currentMonth;
 
         inflationData.isLoaded = true;
         console.log("Inflation data processed and stored");
