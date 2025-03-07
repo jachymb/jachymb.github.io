@@ -114,17 +114,19 @@ lang: cs
     }
 
     const [year, month] = monthInput.split('-').map(Number);
-    let adjustedSalary = salaryInput;
     let index = (year - 2000) * 12 + month;
+    let totalInflation = 1.0;
 
     while (index < inflationData.data.length) {
-      let monthlyRate = Math.pow(1 + inflationData.data[index] / 100, 1 / 12);
-      adjustedSalary *= monthlyRate;
+      monthlyRate = Math.pow(1 + inflationData.data[index] / 100, 1 / 12);
+      totalInflation *= monthlyRate;
       index++;
     }
+    adjustedSalary = salaryInput * totalInflation;
+    const totalInflationPercent = (totalInflation - 1.0) * 100;
 
     document.getElementById("result").innerText =
-      `To by v ${inflationData.currentMonth} odpovídalo: ${adjustedSalary.toFixed(0)} Kč`;
+      `To by v ${inflationData.currentMonth} mělo hodnotu: ${adjustedSalary.toFixed(0)} Kč. Nárůst je tedy ${totalInflationPercent.toFixed(1)}%.`;
   }
 
   document.addEventListener('DOMContentLoaded', () => {
