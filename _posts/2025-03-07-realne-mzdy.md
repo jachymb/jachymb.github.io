@@ -6,6 +6,7 @@ tags: [tool]
 pin: true
 math: true
 published: true
+lang: cs
 ---
 
 
@@ -20,12 +21,16 @@ published: true
 
   <h3 id="result"></h3>
 
-  <a href="https://csu.gov.cz/mira_inflace">Zdroj dat: Český Statistický Úřad.</a> Míra inflace vyjádřená přírůstkem
+  <a href="https://csu.gov.cz/mira_inflace">Zdroj dat: Český Statistický Úřad.</a> 
+  <blockquote>
+  Míra inflace vyjádřená přírůstkem
   průměrného ročního indexu spotřebitelských cen vyjadřuje procentní změnu průměrné cenové hladiny za 12 posledních
   měsíců proti průměru 12 předchozích měsíců.
   Tato míra inflace je vhodná při úpravách nebo posuzování průměrných veličin. Bere se v úvahu zejména při propočtech
   reálných mezd, důchodů a pod.
-  <div id="tablecopy"></div>
+  </blockquote>
+
+  <div id="tablecopy" class="table-wrapper"></div>
 
 <script>
   let inflationData = {

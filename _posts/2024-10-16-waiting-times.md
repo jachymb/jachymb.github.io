@@ -1,5 +1,5 @@
 ---
-title: 'Waiting times'
+title: 'Modelling event waiting times'
 layout: post
 date: 2024-10-16
 tags: [probabilistic modelling,time series,event series]

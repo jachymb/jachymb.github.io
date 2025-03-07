@@ -1,5 +1,5 @@
 ---
-title: 'Counting events'
+title: 'Counting events – how counting probability distributions arise'
 layout: post
 date: 2024-10-17
 tags: [probabilistic modelling,time series,event series]
@@ -11,8 +11,10 @@ In this article, I focus on the question, how many events occur within a time fr
 given a probabilistic model of the waiting times of successive events.
 
 On the lowest level of temporal data, there are timestamps of events.
+In the article on [waiting times](posts/waiting-times/) I explained some options how the distance between 
+those can be modelled probabilistically.
 These are however often pre-aggregated for analytic purposes, most commonly as counts of events per day.
-But this deserves a closer look.
+This deserves a closer look.
 A natural question to ask in such case is, what is the probability distribution of these counts?
 This, at least in principle, can be answered by looking at the distribution of the waiting times 
 and deriving the distribution of the counts from that.  
@@ -132,13 +134,13 @@ $$G_{N(T)}(z) = \mathcal{L}^{-1}\left(\frac{1-\varphi(r)}{r(1-z\varphi(r))}\righ
 where $\mathcal{L}^{-1}$ denotes the inverse Laplace transform 
 and $\varphi(r) = \mathrm{E}[e^{-rY_i}] = \int_{-\infty}^{\infty} e^{-rt} p_{Y_i}(t)\mathrm{d}t$ is the Laplace transform of the waiting time probability density. 
 
-Now this seems promising, obtaining $\varphi$ is usually easy and getting the series expansion of the PGF is also not a huge problem.
+Now this seems promising, obtaining $\varphi(r)$ is usually straightforward and getting the series expansion of the PGF is also not a huge problem.
 (Mathematica can often do both.)
 The challenge here is computing the inverse Laplace transform. 
 This requires techniques of complex analysis even for the simplest cases and to my knowledge an analytic solution doesn't exist in most cases.
 
 Only solution other than reproducing the exponential-Poisson relation (cool exercise btw) above that I was able to find for continuous time
-was for the Erlang distribution, which is a sum of i.i.d. exponential waiting times, so it's a generalization.
+was for the Erlang distribution (a special case of Gamma distribution), which is a sum of i.i.d. exponential waiting times, so it's a generalization.
 In this case, when the waiting time is $\mathrm{Erlang(\alpha, \beta)}, \alpha \in \mathbb{N}, \beta \in \mathbb{R}^+$, then we get:
 
 $$P(N(1)=k) = e^{-\beta} \sum_{m=0}^{\alpha-1}\frac{\beta^{k\alpha+m}}{(k\alpha+m)!}$$
