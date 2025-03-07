@@ -11,7 +11,7 @@ In this article, I focus on the question, how many events occur within a time fr
 given a probabilistic model of the waiting times of successive events.
 
 On the lowest level of temporal data, there are timestamps of events.
-In the article on [waiting times](posts/waiting-times/) I explained some options how the distance between 
+In the article on [waiting times](/posts/waiting-times) I explained some options how the distance between 
 those can be modelled probabilistically.
 These are however often pre-aggregated for analytic purposes, most commonly as counts of events per day.
 This deserves a closer look.
