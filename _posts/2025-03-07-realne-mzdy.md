@@ -126,7 +126,7 @@ lang: cs
     const totalInflationPercent = (totalInflation - 1.0) * 100;
 
     document.getElementById("result").innerText =
-      `To by v ${inflationData.currentMonth} mělo hodnotu: ${adjustedSalary.toFixed(0)} Kč. Nárůst cen je tedy ${totalInflationPercent.toFixed(1)}%.`;
+      `To by v ${inflationData.currentMonth} mělo hodnotu: ${adjustedSalary.toFixed(0)} Kč. Nárůst cen za období je tedy ${totalInflationPercent.toFixed(1)}%.`;
   }
 
   document.addEventListener('DOMContentLoaded', () => {
