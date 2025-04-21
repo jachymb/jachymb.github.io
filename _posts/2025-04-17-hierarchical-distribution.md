@@ -23,6 +23,9 @@ We have historical records of per-store product demand, that we can use as stati
 This article may also serve as a motivating introduction to hierarchical modelling.
 It's similar in nature to textbook problems, but focused on a particular business problem.
 
+(_Confusion alert_: The word "logistic" in this article means "supply chain management", and nothing to do with the mathematical meaning of the word.
+The word "distribution" may either mean a "probability distribution" or "logistic distribution" which I distinguish by the appropriate adjective.)
+
 In practice, this problem is more complicated, but let's start with a simplification to illustrate the main ideas.
 We can formalize the problem mathematically as follows: We have $n$ products and $k$ stores.
 The historical data we have available are counts of SKUs sold per-store, a
@@ -116,7 +119,7 @@ Standard numerical algorithms can be used to find the MLE. It is straightforward
 
 # Complication in real life business – forbidden product store combinations
 As I said the above is just a simplification:
-One of the obstacles in real life is that certain products should never be distributed to some stores.
+One of the obstacles in real life is that certain products should never be logistically distributed to some stores.
 Perhaps it requires a specialized type of storage (e.g. food has different requirements than electronics) 
 the store is not equipped with,
 or perhaps it's a localization issue (e.g. when a product is localized to Czech only, it mustn't be sent to a Hungarian store.)
