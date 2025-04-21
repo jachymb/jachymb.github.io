@@ -110,7 +110,7 @@ This is a middle ground between the above two approaches:
 For products with lots of data, the effect of the regularization will be weak, and they may show their individual specifics if there is data to back it.
 For products with not enough data, the model will regularize them to be estimated somewhere around the global average.
 
-Standard numerical algorithms can be used to find the MLE. It is straightforward to code in Stan, which does all the heavy lifting with the optimize method.
+Standard numerical algorithms can be used to find the MLE. It is straightforward to code in Stan (see appendix), which does all the heavy lifting with the optimize method.
 
 
 # Complication in real life business – forbidden product store combinations
