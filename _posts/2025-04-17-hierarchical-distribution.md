@@ -112,23 +112,6 @@ For products with not enough data, the model will regularize them to be estimate
 
 Standard numerical algorithms can be used to find the MLE. It is straightforward to code in Stan, which does all the heavy lifting with the optimize method.
 
-```stan
-data {
-    int<lower=0> num_stores;
-    int<lower=0> num_products;
-    array[num_products, num_stores] int<lower=0> n;
-}
-parameters {
-    vector<lower=0>[num_stores] alpha;
-    array[num_products] simplex[num_stores] p;
-}
-model {
-    p ~ dirichlet(alpha);
-    for (i in 1:num_products) {  // multinomial_lpmf not vectorized yet
-        n[i] ~ multinomial(p[i]);
-    }
-}
-```
 
 # Complication in real life business – forbidden product store combinations
 As I said the above is just a simplification:
@@ -154,3 +137,27 @@ $$\begin{align*}
 The parameters we are then fitting are entries of the (row stochastic) matrix $\mathbf{p}$ wherever $b_{ij}=1$ and also the entire vector $\boldsymbol\alpha$.
 This is a bit tricky to actually code efficiently, but it can be done.
 If you're interested, write me. 
+
+# References
+
+1.  [Bayesian Data Analysis](https://sites.stat.columbia.edu/gelman/book/), by Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin
+
+# Appending: Stan code for the simple hierarchical model
+
+```stan
+data {
+    int<lower=0> num_stores;
+    int<lower=0> num_products;
+    array[num_products, num_stores] int<lower=0> n;
+}
+parameters {
+    vector<lower=0>[num_stores] alpha;
+    array[num_products] simplex[num_stores] p;
+}
+model {
+    p ~ dirichlet(alpha);
+    for (i in 1:num_products) {  // multinomial_lpmf not vectorized yet
+        n[i] ~ multinomial(p[i]);
+    }
+}
+```
