@@ -67,7 +67,7 @@ $$ \hat{p}_{.j} = \frac{\sum_k n_{kj}}{\sum_{ik} n_{ik}}$$
 
 
 In practice, this would lead to a much better result than Approach 1, 
-but it disrespects the fact that the products do actually behave differently.
+but it disrespects the fact that the products do actually behave differently. We can do better!
  
 # Regularization – a dirty trick or a viable fix to Approach 1?
 A trick one may come up with to solve the problem with approach 1 is to add some quantity
@@ -109,6 +109,7 @@ However, in the joint model, it interacts with the parameters $\mathbf{p}$, esse
 This is a middle ground between the above two approaches: 
 For products with lots of data, the effect of the regularization will be weak, and they may show their individual specifics if there is data to back it.
 For products with not enough data, the model will regularize them to be estimated somewhere around the global average.
+The "weights" for what it means "lots of data" will be found implicitly, from the wider data. 
 
 Standard numerical algorithms can be used to find the MLE. It is straightforward to code in Stan (see appendix), which does all the heavy lifting with the optimize method.
 
