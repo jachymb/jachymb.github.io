@@ -118,6 +118,8 @@ higher $\hat{\lambda}$ means higher overall similarity and thus stronger overall
 
 Standard numerical algorithms can be used to find the MLE. It is straightforward to code in Stan (see appendix), which does all the heavy lifting with the optimize method.
 
+In practice, this leads to up to 5% improvement over the full pooling approach in Alza, measured in terms of either [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) or [total variational distance](https://en.wikipedia.org/wiki/Total_variation_distance_of_probability_measures), when comparing
+the fitted model to the proportions on test data.
 
 # Complication in real life business – forbidden product store combinations
 As I said the above is just a simplification:
